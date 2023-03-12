@@ -1,46 +1,47 @@
 import 'package:flutter/material.dart';
+import 'header.dart';
 
-void main() => runApp(
-      const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: card_project(),
-      ),
-    );
+void main() => runApp(const MaterialApp());
 
-// ignore: camel_case_types
-class card_project extends StatelessWidget {
-  const card_project({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+          appBarTheme: AppBarTheme(color: Colors.teal, centerTitle: true)),
+      home: Hamberger(),
+      debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class Hamberger extends StatefulWidget {
+  const Hamberger({super.key});
+
+  @override
+  State<Hamberger> createState() => _HambergerState();
+}
+
+class _HambergerState extends State<Hamberger> {
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 48, 215, 198),
-      appBar: AppBar(
-        title: const Text(
-          'Card Project',
-          style: TextStyle(
-            fontSize: 25,
-            color: Colors.white70,
+      body: CustomScrollView(slivers: [
+        SliverAppBar(
+          pinned: true,
+          title: Text('Deliver me'),
+          leading: IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.menu),
           ),
+          actions: [
+            IconButton(onPressed: () {}, icon: Icon(Icons.shopping_cart))
+          ],
         ),
-        centerTitle: true,
-        backgroundColor: Colors.teal,
-        elevation: 4.0,
-      ),
-      body: Center(
-        child: Card(
-          color: Colors.teal,
-          child: ListTile(
-            leading: Icon(Icons.shopping_cart),
-            title: Text(
-              'Shop',
-              textAlign: TextAlign.end,
-              style: TextStyle(fontSize: 16),
-            ),
-            iconColor: Colors.blueAccent,
-          ),
-        ),
-      ),
+        Header(),
+      ]),
     );
   }
 }
